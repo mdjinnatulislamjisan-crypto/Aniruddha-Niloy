@@ -1,30 +1,6 @@
 import type { Metadata, Viewport } from 'next';
-import { Cormorant_Garamond, Newsreader, Noto_Serif_Bengali } from 'next/font/google';
 import { SITE } from '@/lib/site';
 import './globals.css';
-
-const display = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-display',
-  display: 'swap',
-});
-
-const body = Newsreader({
-  subsets: ['latin'],
-  style: ['normal', 'italic'],
-  variable: '--font-body',
-  display: 'swap',
-  adjustFontFallback: false,
-});
-
-const bengali = Noto_Serif_Bengali({
-  subsets: ['bengali', 'latin'],
-  weight: ['400', '500', '700'],
-  variable: '--font-bengali',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -51,9 +27,17 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const FONTS_URL =
+  'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+Bengali:wght@400;500;700&display=swap';
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${bengali.variable}`}>
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href={FONTS_URL} />
+      </head>
       <body>{children}</body>
     </html>
   );

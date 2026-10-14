@@ -6,10 +6,23 @@ export const SITE = {
   tagline: 'Poems, stories, novels and myths in Bengali and English.',
   description:
     'The official literary website of Aniruddha Niloy: Bengali and English poems, short stories, novels and original mythological fiction.',
-  url: (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, ''),
+  url: cleanUrl(process.env.NEXT_PUBLIC_SITE_URL),
   facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL || 'https://www.facebook.com/your-page-here',
   instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || 'https://www.instagram.com/your-profile-here',
 };
+
+function cleanUrl(value: string | undefined): string {
+  const fallback = 'http://localhost:3000';
+  if (!value) return fallback;
+  let v = value.trim().replace(/^["']|["']$/g, '').replace(/\/+$/, '');
+  if (!/^https?:\/\//i.test(v)) v = `https://${v}`;
+  try {
+    new URL(v);
+    return v;
+  } catch {
+    return fallback;
+  }
+}
 
 /** Public URL path for each content type. */
 export const TYPE_PATH: Record<ArticleType, string> = {

@@ -16,6 +16,7 @@ const body = Newsreader({
   style: ['normal', 'italic'],
   variable: '--font-body',
   display: 'swap',
+  adjustFontFallback: false,
 });
 
 const bengali = Noto_Serif_Bengali({

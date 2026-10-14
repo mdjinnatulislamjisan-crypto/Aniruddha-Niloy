@@ -165,3 +165,5 @@ middleware.ts        refreshes the session and protects /admin
 2. Every admin page also checks, on the server, that the user exists in the `admins` table.
 3. The real protection is in the database: RLS policies allow writes only when `is_admin()` is true and allow public reads only for `status = 'published'`. Even someone calling your Supabase API directly cannot bypass this.
 4. Markdown is rendered without raw HTML, so article text cannot inject scripts.
+#   A n i r u d d h a - N i l o y  
+ 
